@@ -5,6 +5,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import LoadingSpinner from './LoadingSpinner';
+import { GrUpdate } from "react-icons/gr";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 const Table_Form = () => {
     const { employees, formEmployee, fetchEmployees, setFormEmployee, addEmployee, isEditMode,
@@ -68,7 +70,7 @@ const Table_Form = () => {
                 toast.info(message);
                 setIsEditMode(true);
                 setIsEditIdMode(id);
-                console.log(Employee_1,message)
+                // console.log(Employee_1,message)
             }
         } catch (error) {
             console.log(error);
@@ -123,7 +125,7 @@ const Table_Form = () => {
             setLoadingEmployee(true)
             const response = await axios.put(`${serverURL}/api/employee/update_employee/${isEditIdMode}`,formEmployee,{
                 headers:{
-                    'Content-Type':'Application/Json',
+                    'Content-Type':'application/json',
                 },
                 withCredentials: true
             })
@@ -210,11 +212,11 @@ const Table_Form = () => {
                                         <td className='px-4 py-3'>{item.city}</td>
                                         <td className='px-4 py-3'>{item.phone}</td>
                                         <td className='px-4 py-3 flex justify-center space-x-2'>
-                                            <button onClick={() => handleUpdate(item._id)} className='bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-md text-xs shadow'>
-                                                Edit
+                                            <button onClick={() => handleUpdate(item._id)} className='bg-blue-500 text-[15px] hover:bg-blue-600 text-white px-3 py-2 rounded-md text-xs shadow flex gap-3 items-center'>
+                                               <GrUpdate/> Edit
                                             </button>
-                                            <button onClick={() => handleDelete(item._id)} className='bg-red-500 hover:bg-red-600 text-white px-5  py-2 rounded-md text-xs shadow'>
-                                                Delete
+                                            <button onClick={() => handleDelete(item._id)} className='bg-red-500 text-[15px] hover:bg-red-600 text-white px-3  py-2 rounded-md text-xs shadow flex gap-3 items-center'>
+                                               <RiDeleteBinLine />Delete
                                             </button>
                                         </td>
                                     </tr>

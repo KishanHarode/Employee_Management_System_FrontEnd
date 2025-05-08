@@ -23,11 +23,11 @@ const Table_UserForm = ({children}) => {
         try {
             const response = await axios.get(`${serverURL}/api/employee/get_employees`,{
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type':'application/json',
                 },
                 withCredentials: true,
             });
-            console.log(response?.data?.All_Employee_Data);
+            // console.log(response?.data?.All_Employee_Data);
             setEmployees(response?.data?.All_Employee_Data);
             
         }catch(error){
@@ -43,20 +43,14 @@ const Table_UserForm = ({children}) => {
              },
              withCredentials: true
          })
-         console.log(response?.data?.message)
+        //  console.log(response?.data?.message)
          toast.success(response?.data?.message)
          setLoadingEmployee(false);
-         setTimeout(() => {
-            setMessage("");
-        }, 3000);
         await fetchEmployees();
-         console.log(response);
+        //  console.log(response);
         }catch(error){
             toast.error(error?.response?.data?.message)
             setLoadingEmployee(false);
-            setTimeout(() => {
-                setError("");
-            }, 3000);
             console.log(error?.response?.data?.message)
             console.log('addEmployee',error);   
         }
@@ -77,7 +71,10 @@ const Table_UserForm = ({children}) => {
         setLoadingEmployee    
     }
     useEffect(() => {
-        fetchEmployees();
+        const fetchData = async () => {
+            await fetchEmployees();
+        };
+        fetchData();
     },[])
 
     

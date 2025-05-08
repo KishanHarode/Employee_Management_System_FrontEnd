@@ -13,11 +13,11 @@ const UserContext = ({ children }) => {
         try {
             const response = await axios.get(`${serverURL}/api/employee/get_employee`, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type':'application/json',
                 },
                 withCredentials: true,
             });
-            console.log(response.data.Employee_Data);
+            // console.log(response.data.Employee_Data);
             setUser(response.data.Employee_Data);
         } catch (error) {
             console.log(error);
@@ -28,11 +28,11 @@ const UserContext = ({ children }) => {
         try{
             const response = await axios.get(`${serverURL}/api/auth/user/signout`,{
                 headers:{
-                    'Content-Type' : 'application/json',
+                    'Content-Type':'application/json',
                 },
                 withCredentials: true,
             })
-            console.log(response?.data?.message);
+            // console.log(response?.data?.message);
             toast.success(response?.data?.message);
             setUser(null);
         }
@@ -42,7 +42,10 @@ const UserContext = ({ children }) => {
     }
 
     useEffect(() => {
-        fetchUser();
+       const fetchData = async () => {
+        await fetchUser();
+       };
+       fetchData();
     }, []);
 
     const value = {
