@@ -10,6 +10,7 @@ const Table_UserForm = ({children}) => {
     const [isEditMode,setIsEditMode] = useState(false);
     const [isEditIdMode,setIsEditIdMode] = useState(null);
     const [loadingEmployee,setLoadingEmployee] = useState(false);
+    const [searchText , setSearchText] = useState("");
    
     const [formEmployee, setFormEmployee] = useState({
         name:"",
@@ -17,6 +18,15 @@ const Table_UserForm = ({children}) => {
         department:"",
         city:"",
         phone:""
+    })
+
+    const filterData = employees.filter((candidate)=>{
+        return (
+           candidate.name === searchText.toUpperCase() ? 
+             candidate.name.toUpperCase().includes(searchText.toUpperCase())
+           :
+             candidate.name.toLowerCase().includes(searchText.toLowerCase())
+        )
     })
 
     const fetchEmployees = async () => {
@@ -68,7 +78,10 @@ const Table_UserForm = ({children}) => {
         setIsEditIdMode,
         isEditIdMode,
         loadingEmployee,
-        setLoadingEmployee    
+        setLoadingEmployee,
+        searchText,
+        setSearchText,
+        filterData    
     }
     useEffect(() => {
         const fetchData = async () => {

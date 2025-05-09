@@ -7,10 +7,11 @@ import Swal from 'sweetalert2';
 import LoadingSpinner from './LoadingSpinner';
 import { GrUpdate } from "react-icons/gr";
 import { RiDeleteBinLine } from "react-icons/ri";
+import SearchBar from './SearchBar';
 
 const Table_Form = () => {
-    const { employees, formEmployee, fetchEmployees, setFormEmployee, addEmployee, isEditMode,
-        setIsEditMode,setIsEditIdMode,isEditIdMode, setLoadingEmployee,  loadingEmployee } = useContext(Table_UserFormContext);
+    const { formEmployee, fetchEmployees, setFormEmployee, addEmployee, isEditMode,
+        setIsEditMode,setIsEditIdMode,isEditIdMode, setLoadingEmployee,  loadingEmployee, filterData } = useContext(Table_UserFormContext);
     const { serverURL } = useContext(AuthContext_API);
     
    
@@ -179,7 +180,10 @@ const Table_Form = () => {
             </div>
 
             <div className='lg:w-4/5 w-full max-w-7xl h-[600px] mx-auto bg-white rounded-xl shadow-lg p-6'>
-                <h1 className='text-2xl font-semibold text-center text-gray-800 mb-6'>DataSheet</h1>
+                <div className='flex items-center md:justify-around md:gap-3 mb-6  sm:justify-center gap-5 md:flex-row flex-col'>
+                      <h1 className='text-2xl font-semibold text-center text-gray-800 '>DataSheet</h1>
+                      <SearchBar/>
+                </div>
                 <div className='overflow-x-auto max-h-[520px] overflow-y-auto scrollbar-hide hover:scrollbar-default'>
                     <table className='min-w-full text-sm text-left border-separate border-spacing-y-2 border-spacing-x-0'>
                         <thead className='bg-gradient-to-br rounded-md from-blue-600 to-purple-700 sticky top-0 text-white uppercase text-xs tracking-wider'>
@@ -196,14 +200,14 @@ const Table_Form = () => {
                         <tbody>
                             {/* Example row */}
                             {
-                                employees.length === 0 && (
+                                filterData.length === 0 && (
                                     <tr className='bg-white shadow rounded-md hover:shadow-md hover:bg-gray-100 transition duration-300'>
                                         <td colSpan={7} className='text-center py-4 text-gray-500 font-semibold'>Sorry the data is not available....</td>
                                     </tr>
                                 )
                             }
                             {
-                                employees.map((item) => (
+                                filterData.map((item) => (
                                     <tr key={item._id} className='bg-white shadow rounded-md hover:shadow-md hover:bg-gray-100 transition duration-300'>
                                         <td className='px-4 py-3 font-bold'>{item._id.substring(7, 10)}</td>
                                         <td className='px-4 py-3'>{item.name}</td>

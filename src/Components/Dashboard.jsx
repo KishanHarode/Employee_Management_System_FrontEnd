@@ -44,9 +44,8 @@ const Dashboard = () => {
             Welcome To, {user?.firstName} {user?.lastName}
           </h1>
         </div>
-
         {/* Right Section */}
-        <div className='flex items-center gap-3 relative'>
+        <div className='flex items-center md:gap-3  relative'>
           <button
             className='bg-gradient-to-br flex items-center justify-center gap-2 from-blue-600 to-purple-700 text-white rounded-lg md:px-5 md:py-2 px-2 py-2 hover:from-blue-500 hover:to-purple-500 transition-all duration-300'
             onClick={IsConfirmLogout}
@@ -68,6 +67,7 @@ const Dashboard = () => {
               <div className="flex items-start gap-4 mb-2">
                 <FaUser className="text-blue-700 mt-[2px]" />
                 <p className="text-[14px] text-gray-700 font-semibold break-words">
+                  
                   {user?.firstName} {user?.lastName}
                 </p>
               </div>
